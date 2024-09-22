@@ -1,0 +1,10 @@
+
+[workspace]
+resolver = '2'
+members = [
+	'./libs/save_parser',
+]
+
+[profile.release]
+# Tell `rustc` to optimize for small code size.
+opt-level = "s"

@@ -1,0 +1,45 @@
+{
+  "name": "save_parser",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "./libs/save_parser/src",
+  "targets": {
+    "build-monodon": {
+      "executor": "@monodon/rust:build",
+      "outputs": ["{options.target-dir}"],
+      "options": {
+        "target-dir": "dist/target/libs_save_parser"
+      },
+      "configurations": {
+        "production": {
+          "release": true
+        }
+      }
+    },
+    "build-wasm": {
+      "executor": "nx:run-commands",
+      "options": {
+        "cwd": "libs/save_parser",
+        "commands": [
+          "wasm-pack build --target bundler --out-dir ../../dist/save-parser-web --out-name save-parser"
+        ],
+        "parallel": false
+      },
+      "configurations": {
+        "node": {
+          "commands": [
+            "wasm-pack build --target nodejs --out-dir ../../dist/save-parser-node --out-name save-parser"
+          ]
+        }
+      }
+    },
+    "lint": {
+      "executor": "@monodon/rust:lint",
+      "outputs": ["{options.target-dir}"],
+      "options": {
+        "target-dir": "dist/target/libs_save_parser"
+      }
+    }
+  },
+  "tags": []
+}

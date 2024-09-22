@@ -1,0 +1,54 @@
+{
+  "name": "demo",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/demo/src",
+  "projectType": "application",
+  "tags": [],
+  "targets": {
+    "build": {
+      "executor": "@nx/rspack:rspack",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "target": "web",
+        "outputPath": "dist/apps/demo",
+        "main": "apps/demo/src/main.tsx",
+        "tsConfig": "apps/demo/tsconfig.app.json",
+        "rspackConfig": "apps/demo/rspack.config.js",
+        "assets": ["apps/demo/src/favicon.ico", "apps/demo/src/assets"]
+      },
+      "configurations": {
+        "development": {
+          "mode": "development"
+        },
+        "production": {
+          "mode": "production",
+          "optimization": true,
+          "sourceMap": false
+        }
+      }
+    },
+    "serve": {
+      "executor": "@nx/rspack:dev-server",
+      "options": {
+        "buildTarget": "demo:build:development",
+        "port": 8080
+      },
+      "configurations": {
+        "development": {},
+        "production": {
+          "buildTarget": "demo:build:production"
+        }
+      }
+    },
+    "serve-static": {
+      "executor": "@nx/web:file-server",
+      "dependsOn": ["build"],
+      "options": {
+        "buildTarget": "demo:build",
+        "port": 8080,
+        "spa": true
+      }
+    }
+  }
+}
