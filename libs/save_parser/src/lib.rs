@@ -43,7 +43,7 @@ fn find_zlib_offsets(bytes: &[u8]) -> Vec<usize> {
 }
 
 fn decompress_save_data(compressed_bytes: &mut Vec<u8>) -> Vec<u8> {
-    console::log_1(&"Decompressing inner save".into());
+    console::time_with_label("Decompressing inner save");
     let offsets = find_zlib_offsets(&compressed_bytes);
 
     let mut decompressed = Vec::new();
@@ -60,7 +60,7 @@ fn decompress_save_data(compressed_bytes: &mut Vec<u8>) -> Vec<u8> {
         decoder.read_to_end(&mut bytes).expect("Unable to decompress data");
         decompressed.extend(bytes);
     }
-    console::log_1(&"Inner save decompressed".into());
+    console::time_end_with_label("Decompressing inner save");
 
     decompressed
 }
@@ -181,7 +181,7 @@ fn get_types() -> Types {
 #[wasm_bindgen]
 pub fn read_outer_save(buffer: ArrayBuffer) -> Result<Vec<u8>, String> {
     set_panic_hook();
-    console::log_1(&"Parsing outer save".into());
+    console::time_with_label("Decoding outer save");
     let outer_save_content: Vec<u8> = Uint8Array::new_with_byte_offset_and_length(
         &buffer,
         0,
@@ -191,7 +191,7 @@ pub fn read_outer_save(buffer: ArrayBuffer) -> Result<Vec<u8>, String> {
     let mut outer_save_buffer = Cursor::new(outer_save_content);
     match Save::read(&mut outer_save_buffer) {
         Ok(mut outer_save) => {
-            console::log_1(&"Outer save succesfuly decoded".into());
+          console::time_end_with_label("Decoding outer save");
 
             let bytes_result = match &mut outer_save.root.properties["compressedSaveData"].inner {
                 PropertyInner::Array { value: property_value, .. } => {
@@ -225,15 +225,19 @@ pub fn read_outer_save(buffer: ArrayBuffer) -> Result<Vec<u8>, String> {
 
             let decompressed_bytes = decompress_save_data(compressed_bytes);
             let mut inner_save_buffer = Cursor::new(decompressed_bytes);
-            console::log_1(&"Decoding inner save".into());
+            console::time_with_label("Decoding inner save");
             let types = get_types();
-            match Save::read_with_types(&mut inner_save_buffer, &types) {
+            let json_save = match Save::read_with_types(&mut inner_save_buffer, &types) {
                 Ok(inner_save) => {
-                    console::log_1(&"Serializing to json".into());
+                    console::time_end_with_label("Decoding inner save");
+                    console::time_with_label("Serializing to json");
                     Ok(serde_json::to_vec(&inner_save).unwrap())
                 }
                 Err(error) => Err(error.to_string())
-            }
+            };
+            console::time_end_with_label("Serializing to json");
+
+            json_save
         }
         Err(error) => Err(error.to_string())
     }
