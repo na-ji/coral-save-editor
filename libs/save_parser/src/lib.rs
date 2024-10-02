@@ -10,6 +10,7 @@ use std::io::Cursor;
 use web_sys::console;
 use crate::utils::set_panic_hook;
 use js_sys::{ArrayBuffer, Uint8Array};
+use gloo_utils::format::JsValueSerdeExt;
 
 const ZLIB_HEADER: [u8; 2] = [0x78, 0x9c];
 
@@ -179,7 +180,7 @@ fn get_types() -> Types {
 }
 
 #[wasm_bindgen]
-pub fn read_outer_save(buffer: ArrayBuffer) -> Result<Vec<u8>, String> {
+pub fn read_outer_save(buffer: ArrayBuffer) -> Result<JsValue, String> {
     set_panic_hook();
     console::time_with_label("Decoding outer save");
     let outer_save_content: Vec<u8> = Uint8Array::new_with_byte_offset_and_length(
@@ -231,7 +232,7 @@ pub fn read_outer_save(buffer: ArrayBuffer) -> Result<Vec<u8>, String> {
                 Ok(inner_save) => {
                     console::time_end_with_label("Decoding inner save");
                     console::time_with_label("Serializing to json");
-                    Ok(serde_json::to_vec(&inner_save).unwrap())
+                    Ok(JsValue::from_serde(&inner_save).unwrap())
                 }
                 Err(error) => Err(error.to_string())
             };

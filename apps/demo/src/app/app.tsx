@@ -13,8 +13,7 @@ export function App() {
     reader.addEventListener('loadend', (event) => {
       try {
         const binarySave = read_outer_save(event.target.result);
-        const result = new TextDecoder().decode(binarySave);
-        setSaveData({ json: JSON.parse(result) });
+        setSaveData({ json: binarySave });
       } catch (e) {
         console.error(e);
       }
