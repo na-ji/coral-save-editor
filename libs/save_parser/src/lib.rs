@@ -3,33 +3,35 @@ mod utils;
 use std::cmp::min;
 use wasm_bindgen::prelude::*;
 
-use std::io::{Read};
-use flate2::read::ZlibDecoder;
-use uesave::{ByteArray, PropertyInner, Save, StructType, Types, ValueArray, ValueVec};
-use std::io::Cursor;
-use web_sys::console;
 use crate::utils::set_panic_hook;
-use js_sys::{ArrayBuffer, Uint8Array};
+use flate2::read::ZlibDecoder;
 use gloo_utils::format::JsValueSerdeExt;
+use js_sys::{ArrayBuffer, Uint8Array};
+use std::io::Cursor;
+use std::io::Read;
+use uesave::{ByteArray, PropertyInner, Save, StructType, Types, ValueArray, ValueVec};
+use web_sys::console;
 
 const ZLIB_HEADER: [u8; 2] = [0x78, 0x9c];
 
 #[wasm_bindgen]
-extern "C" {
-}
+extern "C" {}
 
 fn find_zlib_offsets(bytes: &[u8]) -> Vec<usize> {
     let mut offsets = Vec::new();
     let mut index = 0;
 
     while index < bytes.len() {
-        if let Some(offset) = bytes[index..].windows(ZLIB_HEADER.len()).position(|window| window == ZLIB_HEADER) {
+        if let Some(offset) = bytes[index..]
+            .windows(ZLIB_HEADER.len())
+            .position(|window| window == ZLIB_HEADER)
+        {
             let end = min(index + offset + 33 * 1024, bytes.len());
             match ZlibDecoder::new(&bytes[index + offset..end]).read_exact(&mut [0u8]) {
                 Ok(_) => {
                     offsets.push(index + offset);
                     index += offset + ZLIB_HEADER.len();
-                },
+                }
                 Err(_) => {
                     index += offset + ZLIB_HEADER.len();
                     continue;
@@ -58,7 +60,9 @@ fn decompress_save_data(compressed_bytes: &mut Vec<u8>) -> Vec<u8> {
 
         let mut decoder = ZlibDecoder::new(chunk);
         let mut bytes = Vec::new();
-        decoder.read_to_end(&mut bytes).expect("Unable to decompress data");
+        decoder
+            .read_to_end(&mut bytes)
+            .expect("Unable to decompress data");
         decompressed.extend(bytes);
     }
     console::time_end_with_label("Decompressing inner save");
@@ -179,46 +183,39 @@ fn get_types() -> Types {
     types
 }
 
+fn read_compressed_save_data(outer_save: &mut Save) -> Result<&mut Vec<u8>, &str> {
+    let bytes_result = match &mut outer_save.root.properties["compressedSaveData"].inner {
+        PropertyInner::Array {
+            value: property_value,
+            ..
+        } => match property_value {
+            ValueArray::Base(vec) => match vec {
+                ValueVec::Byte(v) => match v {
+                    ByteArray::Byte(b) => Ok(b),
+                    _ => Err("Invalid save data"),
+                },
+                _ => Err("Invalid save data"),
+            },
+            _ => Err("Invalid save data"),
+        },
+        _ => Err("Invalid save data"),
+    };
+    bytes_result
+}
+
 #[wasm_bindgen]
 pub fn read_outer_save(buffer: ArrayBuffer) -> Result<JsValue, String> {
     set_panic_hook();
     console::time_with_label("Decoding outer save");
-    let outer_save_content: Vec<u8> = Uint8Array::new_with_byte_offset_and_length(
-        &buffer,
-        0,
-        buffer.byte_length(),
-    ).to_vec();
+    let outer_save_content: Vec<u8> =
+        Uint8Array::new_with_byte_offset_and_length(&buffer, 0, buffer.byte_length()).to_vec();
 
     let mut outer_save_buffer = Cursor::new(outer_save_content);
     match Save::read(&mut outer_save_buffer) {
         Ok(mut outer_save) => {
-          console::time_end_with_label("Decoding outer save");
+            console::time_end_with_label("Decoding outer save");
 
-            let bytes_result = match &mut outer_save.root.properties["compressedSaveData"].inner {
-                PropertyInner::Array { value: property_value, .. } => {
-                    match property_value {
-                        ValueArray::Base(vec) => {
-                            match vec {
-                                ValueVec::Byte(v) => match v {
-                                    ByteArray::Byte(b) => {
-                                        Ok(b)
-                                    }
-                                    _ => {
-                                        Err("Invalid save data")
-                                    }
-                                },
-                                _ => {
-                                    Err("Invalid save data")}
-                            }
-                        }
-                        _ => {
-                            Err("Invalid save data")}
-                    }
-                }
-                _ => {
-                    Err("Invalid save data")
-                }
-            };
+            let bytes_result = read_compressed_save_data(&mut outer_save);
             if bytes_result.is_err() {
                 return Err(bytes_result.expect_err("").parse().unwrap());
             }
@@ -234,12 +231,12 @@ pub fn read_outer_save(buffer: ArrayBuffer) -> Result<JsValue, String> {
                     console::time_with_label("Serializing to json");
                     Ok(JsValue::from_serde(&inner_save).unwrap())
                 }
-                Err(error) => Err(error.to_string())
+                Err(error) => Err(error.to_string()),
             };
             console::time_end_with_label("Serializing to json");
 
             json_save
         }
-        Err(error) => Err(error.to_string())
+        Err(error) => Err(error.to_string()),
     }
 }
