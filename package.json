@@ -2,7 +2,9 @@
   "name": "@coral-save/source",
   "version": "0.0.0",
   "license": "MIT",
-  "scripts": {},
+  "scripts": {
+    "build-demo": "nx run save_parser:build-wasm && nx run demo:build:production"
+  },
   "private": true,
   "devDependencies": {
     "@babel/core": "^7.14.5",
