@@ -4,9 +4,15 @@
 @let data = decodedData() ;
 
 @if (data) {
-  <pre>
-  {{ players() | json }}
-  </pre>
+
+  <button class="border border-black rounded" (click)="save()">export</button>
+  <br>
+  <app-primitive-form-part
+    path="root.properties.SaveData_0.Struct.value.Struct.currentDate_0.Struct.value.Struct.day_0.Int" />
+
+  <app-players-list />
+
+
 }
 
 <router-outlet></router-outlet>
