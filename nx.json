@@ -44,10 +44,16 @@
       "e2eTestRunner": "none",
       "linter": "eslint",
       "style": "scss",
-      "unitTestRunner": "none"
+      "unitTestRunner": "none",
+      "skipTests": true
     },
     "@nx/angular:component": {
-      "style": "css"
+      "style": "scss",
+      "skipTests": true
+    },
+    "@schematics/angular:component": {
+      "style": "scss",
+      "skipTests": true
     },
     "@schematics/angular:service": {
       "skipTests": true
