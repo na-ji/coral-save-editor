@@ -1,13 +1,32 @@
-import { Component } from '@angular/core';
+import { Component, effect, inject } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { FileHandlerComponent } from './file-handler/file-handler.component';
+import { SaveGameService } from './core/save-game/save-game.service';
+import { JsonPipe } from '@angular/common';
+import { CoralIslandSaveGameService } from './coral-island-save-game/coral-island-save-game.service';
+import { CoralIslandSaveGame } from './coral-island-save-game/coral-island-save-game.type';
 
 @Component({
   standalone: true,
-  imports: [RouterModule],
+  imports: [RouterModule, FileHandlerComponent, JsonPipe],
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
 export class AppComponent {
-  title = 'editor';
+  #saveGameService = inject(SaveGameService);
+  status = this.#saveGameService.status;
+  decodedData = this.#saveGameService.decodedData;
+  #coralIslandSaveGameService = inject(CoralIslandSaveGameService);
+  players = this.#coralIslandSaveGameService.players;
+
+  constructor() {
+    effect(
+      () => {
+        const data = this.decodedData();
+        this.#coralIslandSaveGameService.saveGame.set(data as CoralIslandSaveGame | null | undefined);
+      },
+      { allowSignalWrites: true },
+    );
+  }
 }

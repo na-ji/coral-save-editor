@@ -1,1 +1,12 @@
+<app-file-handler />
+{{ status() }}
+
+@let data = decodedData() ;
+
+@if (data) {
+  <pre>
+  {{ players() | json }}
+  </pre>
+}
+
 <router-outlet></router-outlet>
