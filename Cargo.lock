@@ -198,6 +198,7 @@ dependencies = [
 name = "save_parser"
 version = "0.1.0"
 dependencies = [
+ "byteorder",
  "console_error_panic_hook",
  "flate2",
  "gloo-utils",

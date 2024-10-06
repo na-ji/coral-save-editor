@@ -1,6 +1,6 @@
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import styles from './app.module.css';
-import { read_outer_save } from '@coral/save-parser';
+import { decode_save } from '@coral/save-parser';
 import { ChangeEvent, useCallback, useState } from 'react';
 import { SvelteJSONEditor } from './JSONEditor';
 
@@ -12,7 +12,7 @@ export function App() {
     const reader = new FileReader();
     reader.addEventListener('loadend', (event) => {
       try {
-        const binarySave = read_outer_save(event.target.result);
+        const binarySave = decode_save(event.target.result);
         setSaveData({ json: binarySave });
       } catch (e) {
         console.error(e);
