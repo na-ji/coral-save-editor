@@ -40,15 +40,6 @@
           "buildTarget": "demo:build:production"
         }
       }
-    },
-    "serve-static": {
-      "executor": "@nx/web:file-server",
-      "dependsOn": ["build"],
-      "options": {
-        "buildTarget": "demo:build",
-        "port": 8080,
-        "spa": true
-      }
     }
   }
 }

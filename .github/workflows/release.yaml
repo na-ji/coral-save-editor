@@ -1,0 +1,30 @@
+name: Release new app version
+
+on:
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  id-token: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 'Checkout repository'
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: 'Install Node'
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: 'Install node dependencies'
+        run: npm ci --prefer-offline
+      - name: 'Print Environment Info'
+        run: npx nx report
+      - name: 'Release app'
+        run: npx nx release --skip-publish
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
