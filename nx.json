@@ -46,5 +46,16 @@
       "style": "scss",
       "unitTestRunner": "none"
     }
+  },
+  "release": {
+    "projects": ["*"],
+    "version": {
+      "conventionalCommits": true
+    },
+    "changelog": {
+      "workspaceChangelog": {
+        "createRelease": "github"
+      }
+    }
   }
 }
