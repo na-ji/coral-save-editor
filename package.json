@@ -6,6 +6,22 @@
     "build-demo": "nx run save_parser:build-wasm && nx run demo:build:production"
   },
   "private": true,
+  "dependencies": {
+    "@angular/animations": "~18.2.0",
+    "@angular/common": "~18.2.0",
+    "@angular/compiler": "~18.2.0",
+    "@angular/core": "~18.2.0",
+    "@angular/forms": "~18.2.0",
+    "@angular/platform-browser": "~18.2.0",
+    "@angular/platform-browser-dynamic": "~18.2.0",
+    "@angular/router": "~18.2.0",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
+    "rxjs": "~7.8.0",
+    "tslib": "^2.3.0",
+    "vanilla-jsoneditor": "^1.0.6",
+    "zone.js": "~0.14.3"
+  },
   "devDependencies": {
     "@angular-devkit/build-angular": "~18.2.0",
     "@angular-devkit/core": "~18.2.0",
@@ -52,21 +68,5 @@
     "tailwindcss": "^3.0.2",
     "typescript": "~5.5.2",
     "typescript-eslint": "^8.8.0"
-  },
-  "dependencies": {
-    "@angular/animations": "~18.2.0",
-    "@angular/common": "~18.2.0",
-    "@angular/compiler": "~18.2.0",
-    "@angular/core": "~18.2.0",
-    "@angular/forms": "~18.2.0",
-    "@angular/platform-browser": "~18.2.0",
-    "@angular/platform-browser-dynamic": "~18.2.0",
-    "@angular/router": "~18.2.0",
-    "react": "18.3.1",
-    "react-dom": "18.3.1",
-    "rxjs": "~7.8.0",
-    "tslib": "^2.3.0",
-    "vanilla-jsoneditor": "^1.0.6",
-    "zone.js": "~0.14.3"
   }
 }
