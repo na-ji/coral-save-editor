@@ -1,7 +1,7 @@
 import { Component, effect, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { FileHandlerComponent } from '../file-handler/file-handler.component';
-import { PlayersListComponent } from '../coral-island-save-game/players-list/players-list.component';
+import { PlayersListComponent } from '../coral-island-editor/players-list/players-list.component';
 import { SaveGameService } from '../core/save-game/save-game.service';
 import { CoralIslandSaveGameService } from '../coral-island-save-game/coral-island-save-game.service';
 import { CoralIslandSaveGame } from '../coral-island-save-game/coral-island-save-game.type';
