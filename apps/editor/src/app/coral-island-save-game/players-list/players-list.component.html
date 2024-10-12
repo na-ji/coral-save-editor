@@ -4,7 +4,9 @@
 
   <li>
     <div>{{ playerInfo + '.Name_0.Str' | saveGameValue }}</div>
-    <div>{{ playerPath + '.playerCurrentGold_0.Int' | saveGameValue }}</div>
+    <div>
+      <ci-ui-money [amount]="playerPath + '.playerCurrentGold_0.Int' | saveGameValue" />
+    </div>
   </li>
 
   <!--    <app-primitive-form-part [path]="playerInfo + '.Name_0.Str'" />-->
