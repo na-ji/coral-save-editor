@@ -15,6 +15,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@coral-island/ui": ["libs/coral-island-ui/src/index.ts"],
       "@coral/save-parser": ["dist/save-parser-web"]
     }
   },

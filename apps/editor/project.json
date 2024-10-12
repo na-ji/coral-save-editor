@@ -13,7 +13,6 @@
         "outputPath": "dist/apps/editor",
         "index": "apps/editor/src/index.html",
         "browser": "apps/editor/src/main.ts",
-        "polyfills": ["zone.js"],
         "tsConfig": "apps/editor/tsconfig.app.json",
         "inlineStyleLanguage": "scss",
         "assets": [
@@ -23,7 +22,10 @@
           }
         ],
         "styles": ["apps/editor/src/styles.scss"],
-        "scripts": []
+        "scripts": [],
+        "stylePreprocessorOptions": {
+          "includePaths": ["libs/coral-island-ui/src/styles"]
+        }
       },
       "configurations": {
         "production": {

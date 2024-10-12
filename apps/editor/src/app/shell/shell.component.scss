@@ -1,0 +1,14 @@
+:host {
+  display: flex;
+  max-width: 2560px;
+  margin-inline: auto;
+  flex-direction: row;
+  align-items: flex-start;
+  min-height: 100vh;
+}
+
+.editor-sidebar {
+  scrollbar-width: thin;
+  scrollbar-color: #a1a1a1 #000000;
+  background: rgb(0 0 0 / 0.75);
+}

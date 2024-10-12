@@ -1,0 +1,9 @@
+@switch (formType()) {
+  @case ('text') {
+    <input [formControl]="formControl" class="ml-5 border border-black" type="text">
+  }
+  @case ('int') {
+    <input [formControl]="formControl" type="number" class="ml-5 border border-black" pattern="^[0-9]*$">
+  }
+
+}

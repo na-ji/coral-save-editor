@@ -1,0 +1,17 @@
+<aside class="editor-sidebar flex flex-col h-dvh overflow-x-hidden overflow-y-auto sticky top-0 w-[450px]">
+  <app-file-handler />
+  <button class="border border-black rounded" (click)="save()">export</button>
+  <hr />
+  <app-players-list />
+</aside>
+<main class="flex flex-col w-full min-h-dvh">
+  @let data = decodedData() ; @if (status() === 'NOT_STARTED') {
+  <p>Select a file to start editing your save game.</p>
+  } @else if (status() === 'EXPORTING' || status() === 'SUCCESS' || (status() === 'PROCESSING' && !!data)) {
+  <router-outlet />
+  } @else if (status() === 'PROCESSING' && !data) {
+  <p>Processing, this may take some minutes.</p>
+  } @else if (status() === 'ERROR') {
+  <p>There was an error loading your save game. Please try again.</p>
+  }
+</main>
