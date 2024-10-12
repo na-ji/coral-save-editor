@@ -57,6 +57,10 @@
     },
     "@schematics/angular:service": {
       "skipTests": true
+    },
+    "@nx/angular:library": {
+      "linter": "eslint",
+      "unitTestRunner": "none"
     }
   },
   "release": {
