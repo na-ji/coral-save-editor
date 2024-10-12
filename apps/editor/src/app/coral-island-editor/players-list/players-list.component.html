@@ -2,15 +2,14 @@
   @for (player of players(); track player) { @let playerPath = PLAYERS_ARRAY_PATH + '.' + $index + '.Struct' ; @let
   playerInfo = playerPath + '.playerInfo_0.Struct.value.Struct' ;
 
-  <li class="rounded-3xl p-4 bg-beige font-bold">
-    <div class="flex justify-between items-center text-lg">
-      <div class="text-muted">{{ playerInfo + '.farmName_0.Str' | saveGameValue }}</div>
-      <ci-ui-money [amount]="playerPath + '.playerCurrentGold_0.Int' | saveGameValue" />
-    </div>
-    <div class="text-primary-dark text-xl">{{ playerInfo + '.Name_0.Str' | saveGameValue }}</div>
+  <li>
+    <a class="rounded-3xl block p-4 bg-beige font-bold" [routerLink]="['player', $index]">
+      <div class="flex justify-between items-center text-lg">
+        <div class="text-muted">{{ playerInfo + '.farmName_0.Str' | saveGameValue }}</div>
+        <ci-ui-money [amount]="playerPath + '.playerCurrentGold_0.Int' | saveGameValue" />
+      </div>
+      <div class="text-primary-dark text-xl">{{ playerInfo + '.Name_0.Str' | saveGameValue }}</div>
+    </a>
   </li>
-
-  <!--    <app-primitive-form-part [path]="playerInfo + '.Name_0.Str'" />-->
-  <!--    <app-primitive-form-part [path]="playerPath + '.playerCurrentGold_0.Int'" />-->
   }
 </ul>

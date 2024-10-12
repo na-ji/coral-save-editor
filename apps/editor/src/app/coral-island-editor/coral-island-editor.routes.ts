@@ -5,6 +5,11 @@ export const CORAL_ISLAND_EDITOR_ROUTES: Routes = [
   {
     path: '',
     component: CoralIslandEditorComponent,
-    children: [],
+    children: [
+      {
+        path: 'player/:index',
+        loadComponent: () => import('./player/player.component').then((c) => c.PlayerComponent),
+      },
+    ],
   },
 ];
