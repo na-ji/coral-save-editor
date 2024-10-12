@@ -1,3 +1,5 @@
+@use '_fonts';
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -5,4 +7,13 @@
 body {
   background: linear-gradient(#0009, #0009) fixed, url(/bg.jpg) center no-repeat fixed;
   background-size: cover, cover;
+  color: #5a4627;
+  font-family: 'QTVagaRound', sans-serif;
+}
+
+hr {
+  border: none;
+  height: 4px;
+  border-radius: 2px;
+  background: rgb(127 127 127 / 10%);
 }
