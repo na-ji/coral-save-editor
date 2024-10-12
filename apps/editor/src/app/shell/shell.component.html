@@ -1,10 +1,10 @@
-<aside>
+<aside class="sticky top-0">
   <app-file-handler />
   <button class="border border-black rounded" (click)="save()">export</button>
   <hr />
   <app-players-list />
 </aside>
-<main>
+<main class="flex flex-col w-full min-h-dvh">
   @let data = decodedData() ; @if (status() === 'NOT_STARTED') {
   <p>Select a file to start editing your save game.</p>
   } @else if (status() === 'EXPORTING' || status() === 'SUCCESS' || (status() === 'PROCESSING' && !!data)) {

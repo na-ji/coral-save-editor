@@ -1,3 +1,8 @@
 :host {
   display: flex;
+  max-width: 2560px;
+  margin-inline: auto;
+  flex-direction: row;
+  align-items: flex-start;
+  min-height: 100vh;
 }
