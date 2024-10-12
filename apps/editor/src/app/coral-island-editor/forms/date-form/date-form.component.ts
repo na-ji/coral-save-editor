@@ -1,8 +1,9 @@
 import { Component, DestroyRef, inject, input, OnInit } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { addDays, InGameDate, Seasons, ZERO_UUID } from '@coral-island/utils';
+import { addDays, InGameDate, Seasons } from '@coral-island/utils';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { SaveGameService } from '../../../core/save-game/save-game.service';
+import { editorBasicStruct, editorEnum, editorInt } from '@editor/types';
 
 @Component({
   selector: 'app-date-form',
@@ -37,30 +38,15 @@ export class DateFormComponent implements OnInit {
     this.formGroup.valueChanges.pipe(takeUntilDestroyed(this.#destroyRef)).subscribe({
       next: () => {
         const formRawValue = this.formGroup.getRawValue();
-        const dateStruct = {
-          Struct: {
-            value: {
-              Struct: {
-                day_0: {
-                  Int: formRawValue.day,
-                },
-                season_0: {
-                  Enum: {
-                    value: 'EC_Season::' + formRawValue.season,
-                    enum_type: 'EC_Season',
-                  },
-                },
-                year_0: {
-                  Int: formRawValue.year,
-                },
-              },
-            },
-            struct_type: {
-              Struct: 'C_TimeDate',
-            },
-            struct_id: ZERO_UUID,
+        const dateStruct = editorBasicStruct(
+          {
+            day_0: editorInt(formRawValue.day),
+            season_0: editorEnum('EC_Season', formRawValue.season),
+            year_0: editorInt(formRawValue.year),
           },
-        };
+          'C_TimeDate',
+        );
+
         this.#saveGameService.set(this.path(), dateStruct);
       },
     });
