@@ -1,24 +1,51 @@
 <aside class="editor-sidebar flex flex-col h-dvh overflow-x-hidden overflow-y-auto sticky top-0 w-[450px]">
   <app-file-handler />
 
-  <span [attr.title]="!decodedData() ? 'Load a file to activate exporting' : null">
-    <button class="border border-black rounded" [disabled]="!decodedData()" (click)="save()">export</button>
+  <span class="mx-2 mt-4" [attr.title]="!decodedData() ? 'Load a file to activate exporting' : null">
+    <button
+      class="border-white rounded-full disabled:opacity-30 border-2 text-white px-4 py-2 w-full hover:bg-white hover:text-black disabled:pointer-events-none font-bold"
+      [disabled]="!decodedData()"
+      (click)="save()"
+    >
+      export
+    </button>
   </span>
+
   @if (decodedData()) {
-  <hr />
-  <a class="rounded-3xl block p-4 bg-beige font-bold" routerLink="world">World</a>
-  <hr />
+  <hr class="m-4" />
+  <h2 class="text-white text-xl font-bold m-2">Configurations</h2>
+  <a
+    class="mx-2 rounded-3xl block p-4 bg-beige font-bold group"
+    routerLinkActive="!bg-[#44b899] text-white "
+    routerLink="world"
+    >World</a
+  >
+  <hr class="m-4" />
   <app-players-list />
   }
 </aside>
 <main class="flex flex-col w-full min-h-dvh">
   @let data = decodedData() ; @if (status() === 'NOT_STARTED') {
-  <p>Select a file to start editing your save game.</p>
+  <ci-ui-card class="m-8">
+    <h2 class="mb-2">Welcome to coral island save game editor!</h2>
+    <p>Select a file at the top left corner to start editing your save game.</p>
+    <p>
+      Steam save games can be found at the following location (windows): %LOCALAPPDATA%\ProjectCoral\Saved\SaveGames
+    </p>
+  </ci-ui-card>
   } @else if (status() === 'EXPORTING' || status() === 'SUCCESS' || (status() === 'PROCESSING' && !!data)) {
   <router-outlet />
   } @else if (status() === 'PROCESSING' && !data) {
+  <ci-ui-card class="m-8">
+    <h2 class="mb-2">Processing</h2>
+    <p>Processing, this may take some minutes.</p>
+  </ci-ui-card>
   <p>Processing, this may take some minutes.</p>
   } @else if (status() === 'ERROR') {
-  <p>There was an error loading your save game. Please try again.</p>
+  <ci-ui-card class="m-8">
+    <h2 class="mb-2">Error</h2>
+    <p>There was an error loading your save game. Please try again.</p>
+  </ci-ui-card>
+
   }
 </main>
