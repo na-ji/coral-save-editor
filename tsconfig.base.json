@@ -17,7 +17,8 @@
     "paths": {
       "@coral-island/ui": ["libs/coral-island-ui/src/index.ts"],
       "@coral-island/utils": ["libs/coral-island-utils/src/index.ts"],
-      "@coral/save-parser": ["dist/save-parser-web"]
+      "@coral/save-parser": ["dist/save-parser-web"],
+      "@editor/types": ["libs/editor-types/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
