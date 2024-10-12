@@ -1,5 +1,5 @@
 import { Component, effect, inject } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { RouterLink, RouterOutlet } from '@angular/router';
 import { FileHandlerComponent } from '../file-handler/file-handler.component';
 import { PlayersListComponent } from '../coral-island-editor/players-list/players-list.component';
 import { SaveGameService } from '../core/save-game/save-game.service';
@@ -9,7 +9,7 @@ import { CoralIslandSaveGame } from '../coral-island-save-game/coral-island-save
 @Component({
   selector: 'app-shell',
   standalone: true,
-  imports: [RouterOutlet, FileHandlerComponent, PlayersListComponent],
+  imports: [RouterOutlet, FileHandlerComponent, PlayersListComponent, RouterLink],
   templateUrl: './shell.component.html',
   styleUrl: './shell.component.scss',
 })

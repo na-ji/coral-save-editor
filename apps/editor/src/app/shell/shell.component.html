@@ -1,8 +1,15 @@
 <aside class="editor-sidebar flex flex-col h-dvh overflow-x-hidden overflow-y-auto sticky top-0 w-[450px]">
   <app-file-handler />
-  <button class="border border-black rounded" (click)="save()">export</button>
+
+  <span [attr.title]="!decodedData() ? 'Load a file to activate exporting' : null">
+    <button class="border border-black rounded" [disabled]="!decodedData()" (click)="save()">export</button>
+  </span>
+  @if (decodedData()) {
+  <hr />
+  <a class="rounded-3xl block p-4 bg-beige font-bold" routerLink="world">World</a>
   <hr />
   <app-players-list />
+  }
 </aside>
 <main class="flex flex-col w-full min-h-dvh">
   @let data = decodedData() ; @if (status() === 'NOT_STARTED') {

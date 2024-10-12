@@ -1,0 +1,12 @@
+<div [formGroup]="formGroup">
+  <input formControlName="day" inputmode="number" max="28" min="1" pattern="[0-9]" type="number" />
+
+  <button (click)="increaseDay(1)" class="btn -ml-2 touch-manipulation">+</button>
+
+  <select formControlName="season">
+    @for (seasonOption of Seasons; track seasonOption) {
+    <option [value]="seasonOption">{{ seasonOption }}</option>
+    }
+  </select>
+  <input formControlName="year" inputmode="number" min="1" pattern="[0-9]" type="number" />
+</div>

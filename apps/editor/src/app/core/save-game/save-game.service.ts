@@ -31,7 +31,7 @@ export class SaveGameService {
     reader.readAsArrayBuffer(saveFile);
   }
 
-  get(path: string): Signal<undefined | null | Record<string, any> | Record<string, any>[]> {
+  get(path: string): Signal<any> {
     return computed(() => {
       const data = this.decodedData();
       return path.split('.').reduce((a, b) => a?.[b], data);

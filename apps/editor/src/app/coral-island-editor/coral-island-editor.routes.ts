@@ -7,6 +7,10 @@ export const CORAL_ISLAND_EDITOR_ROUTES: Routes = [
     component: CoralIslandEditorComponent,
     children: [
       {
+        path: 'world',
+        loadComponent: () => import('./world/world.component').then((c) => c.WorldComponent),
+      },
+      {
         path: 'player/:index',
         loadComponent: () => import('./player/player.component').then((c) => c.PlayerComponent),
       },
