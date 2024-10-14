@@ -1,4 +1,4 @@
-import { Component, HostListener, inject, signal } from '@angular/core';
+import { Component, ElementRef, HostListener, inject, signal, viewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SaveGameService } from '../core/save-game/save-game.service';
 
@@ -9,6 +9,7 @@ import { SaveGameService } from '../core/save-game/save-game.service';
   templateUrl: './file-handler.component.html',
   styleUrl: './file-handler.component.scss',
   host: {
+    '[class]': '"group"',
     '[class.is-dragging-over-body]': 'isDraggingOverBody()',
     '[class.is-dragging-over]': 'isDraggingOver()',
   },
@@ -16,6 +17,7 @@ import { SaveGameService } from '../core/save-game/save-game.service';
 export class FileHandlerComponent {
   isDraggingOverBody = signal<boolean>(false);
   isDraggingOver = signal<boolean>(false);
+  input = viewChild<ElementRef>('input');
   #saveGameService = inject(SaveGameService);
 
   parseSaveGame($event: Event) {
@@ -24,6 +26,12 @@ export class FileHandlerComponent {
     const file = files?.item(0);
 
     if (file) this.#saveGameService.parseSaveGame(file);
+    this.#resetInput();
+  }
+
+  @HostListener('click', ['$event'])
+  openFilePicker() {
+    this.input()?.nativeElement.click();
   }
 
   @HostListener('drop', ['$event'])
@@ -72,5 +80,10 @@ export class FileHandlerComponent {
   onBodyDragLeaveDrop($event: DragEvent) {
     $event.preventDefault();
     this.isDraggingOverBody.set(false);
+  }
+
+  #resetInput() {
+    const input = this.input();
+    if (input) input.nativeElement.value = '';
   }
 }

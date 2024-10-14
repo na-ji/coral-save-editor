@@ -1,0 +1,16 @@
+:host {
+  cursor: pointer;
+  padding: theme('spacing.4');
+
+  background: rgb(255 255 255 / 0.3);
+
+  border: 2px solid rgb(255 255 255 / 0.3);
+
+  &.is-dragging-over-body {
+    border-style: dashed;
+  }
+
+  &.is-dragging-over {
+    border-color: white;
+  }
+}
