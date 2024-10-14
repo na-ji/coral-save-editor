@@ -1,2 +1,7 @@
-<h2>Player: {{ playerPath() + '.playerInfo_0.Struct.value.Struct.Name_0.Str' | saveGameValue }}</h2>
-<app-player-info [playerPath]="playerPath()" />
+<h2 class="text-white text-3xl my-5">
+  Player configuration: {{ playerPath() + '.playerInfo_0.Struct.value.Struct.Name_0.Str' | saveGameValue }}
+</h2>
+<ci-ui-card>
+  <h3>General player information</h3>
+  <app-player-info [playerPath]="playerPath()" />
+</ci-ui-card>

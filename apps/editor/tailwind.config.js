@@ -6,6 +6,9 @@ module.exports = {
   content: [join(__dirname, 'src/**/!(*.stories|*.spec).{ts,html}'), ...createGlobPatternsForDependencies(__dirname)],
   theme: {
     extend: {
+      gap: {
+        form: '.5rem',
+      },
       colors: {
         beige: {
           DEFAULT: 'rgb(247 242 232)',

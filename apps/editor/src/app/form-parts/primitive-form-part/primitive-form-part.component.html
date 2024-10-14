@@ -1,9 +1,8 @@
-@switch (formType()) {
-  @case ('text') {
-    <input [formControl]="formControl" class="ml-5 border border-black" type="text">
-  }
-  @case ('int') {
-    <input [formControl]="formControl" type="number" class="ml-5 border border-black" pattern="^[0-9]*$">
-  }
-
-}
+<mat-form-field>
+  <mat-label>{{ label() }}</mat-label>
+  @switch (formType()) { @case ('text') {
+  <input matInput [formControl]="formControl" type="text" />
+  } @case ('int') {
+  <input matInput [formControl]="formControl" type="number" pattern="^[0-9]*$" />
+  } }
+</mat-form-field>

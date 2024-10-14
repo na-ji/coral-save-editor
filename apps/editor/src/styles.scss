@@ -1,5 +1,6 @@
 @use '_fonts';
 @use '_material-theme';
+@use '_material-form-field';
 
 @tailwind base;
 @tailwind components;
@@ -26,7 +27,10 @@ body {
   }
 
   h2 {
-    font-weight: theme('fontWeight.bold');
-    @apply text-xl;
+    @apply font-bold;
+  }
+
+  h3 {
+    @apply text-xl font-bold mb-2;
   }
 }

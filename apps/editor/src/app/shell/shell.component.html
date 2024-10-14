@@ -27,7 +27,7 @@
 <main class="flex flex-col w-full min-h-dvh">
   @let data = decodedData() ; @if (status() === 'NOT_STARTED') {
   <ci-ui-card class="m-8">
-    <h2 class="mb-2">Welcome to coral island save game editor!</h2>
+    <h3 class="mb-2">Welcome to coral island save game editor!</h3>
     <p>Select a file at the top left corner to start editing your save game.</p>
     <p>
       Steam save games can be found at the following location (windows): %LOCALAPPDATA%\ProjectCoral\Saved\SaveGames
@@ -37,12 +37,12 @@
   <router-outlet />
   } @else if (status() === 'PROCESSING' && !data) {
   <ci-ui-card class="m-8">
-    <h2 class="mb-2">Processing</h2>
+    <h3 class="mb-2">Processing</h3>
     <p>Processing, this may take some minutes.</p>
   </ci-ui-card>
   } @else if (status() === 'ERROR') {
   <ci-ui-card class="m-8">
-    <h2 class="mb-2">Error</h2>
+    <h3 class="mb-2">Error</h3>
     <p>There was an error loading your save game. Please try again.</p>
   </ci-ui-card>
 
