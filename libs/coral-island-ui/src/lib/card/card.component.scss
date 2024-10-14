@@ -1,0 +1,7 @@
+:host {
+  background: theme('colors.beige.DEFAULT');
+  border-radius: theme('borderRadius.3xl');
+  padding: theme('spacing.4');
+  display: flex;
+  flex-direction: column;
+}

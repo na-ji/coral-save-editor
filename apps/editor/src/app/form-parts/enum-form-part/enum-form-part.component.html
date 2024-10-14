@@ -1,0 +1,8 @@
+<mat-form-field>
+  <mat-label>{{ label() }}</mat-label>
+  <select [formControl]="formControl" matNativeControl>
+    @for (option of options(); track option) {
+    <option [value]="option">{{ option | prettyEnum }}</option>
+    }
+  </select>
+</mat-form-field>

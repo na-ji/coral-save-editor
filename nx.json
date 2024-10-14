@@ -55,6 +55,9 @@
       "style": "scss",
       "skipTests": true
     },
+    "@schematics/angular:pipe": {
+      "skipTests": true
+    },
     "@schematics/angular:service": {
       "skipTests": true
     },

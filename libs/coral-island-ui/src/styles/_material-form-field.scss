@@ -1,0 +1,16 @@
+:root {
+  --mat-form-field-container-vertical-padding: 10px;
+  --mat-form-field-container-height: 44px;
+}
+
+.mat-mdc-text-field-wrapper.mdc-text-field {
+  border-radius: var(--mdc-outlined-text-field-container-shape, var(--mat-app-corner-extra-small));
+}
+
+.mdc-text-field--outlined:not(.mdc-text-field--disabled) {
+  background: #fffdfa;
+}
+
+.mdc-text-field--outlined:not(.mdc-text-field--disabled) .mdc-notched-outline__notch {
+  border-right: 0;
+}

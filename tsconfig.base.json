@@ -8,15 +8,18 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "importHelpers": true,
-    "target": "es2015",
+    "target": "es2020",
     "module": "esnext",
     "lib": ["es2020", "dom"],
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@coral-island/enums": ["libs/coral-island-enums/index.ts"],
       "@coral-island/ui": ["libs/coral-island-ui/src/index.ts"],
-      "@coral/save-parser": ["dist/save-parser-web"]
+      "@coral-island/utils": ["libs/coral-island-utils/src/index.ts"],
+      "@coral/save-parser": ["dist/save-parser-web"],
+      "@editor/types": ["libs/editor-types/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

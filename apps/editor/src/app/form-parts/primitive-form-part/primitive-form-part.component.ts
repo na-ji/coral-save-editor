@@ -2,17 +2,18 @@ import { Component, computed, DestroyRef, inject, input, OnInit } from '@angular
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { SaveGameService } from '../../core/save-game/save-game.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { MatFormField, MatLabel } from '@angular/material/form-field';
+import { MatInput } from '@angular/material/input';
 
 @Component({
   selector: 'app-primitive-form-part',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, MatFormField, MatInput, MatLabel],
   templateUrl: './primitive-form-part.component.html',
-  styleUrl: './primitive-form-part.component.scss',
 })
 export class PrimitiveFormPartComponent implements OnInit {
-  #destroyRef = inject(DestroyRef);
   path = input.required<string>();
+  label = input.required<string>();
   protected formControl = new FormControl();
   protected formType = computed(() => {
     let type = 'text';
@@ -30,6 +31,7 @@ export class PrimitiveFormPartComponent implements OnInit {
 
     return type;
   });
+  #destroyRef = inject(DestroyRef);
   #saveGameService = inject(SaveGameService);
 
   ngOnInit(): void {

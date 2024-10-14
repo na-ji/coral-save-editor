@@ -49,6 +49,11 @@
           "sourceMap": true
         }
       },
+      "dependsOn": [
+        {
+          "target": "extract-enums"
+        }
+      ],
       "defaultConfiguration": "production"
     },
     "serve": {
@@ -61,6 +66,11 @@
           "buildTarget": "editor:build:development"
         }
       },
+      "dependsOn": [
+        {
+          "target": "extract-enums"
+        }
+      ],
       "defaultConfiguration": "development"
     },
     "extract-i18n": {
@@ -79,6 +89,15 @@
         "staticFilePath": "dist/apps/editor/browser",
         "spa": true
       }
+    },
+    "extract-enums": {
+      "executor": "nx:run-commands",
+      "configurations": {
+        "extract": {
+          "commands": ["ts-node libs/coral-island-enums/extractor.ts"]
+        }
+      },
+      "defaultConfiguration": "extract"
     }
   }
 }

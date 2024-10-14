@@ -1,0 +1,21 @@
+<div [formGroup]="formGroup" class="flex gap-form">
+  <mat-form-field>
+    <mat-label>Day</mat-label>
+    <input matInput formControlName="day" inputmode="number" max="28" min="1" pattern="[0-9]" type="number" />
+  </mat-form-field>
+  <button mat-mini-fab (click)="increaseDay(1)" class="touch-manipulation">
+    <mat-icon>add</mat-icon>
+  </button>
+  <mat-form-field>
+    <mat-label>Season</mat-label>
+    <select matNativeControl formControlName="season">
+      @for (seasonOption of Seasons; track seasonOption) {
+      <option [value]="seasonOption">{{ seasonOption }}</option>
+      }
+    </select>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Year</mat-label>
+    <input matInput formControlName="year" inputmode="number" min="1" pattern="[0-9]" type="number" />
+  </mat-form-field>
+</div>

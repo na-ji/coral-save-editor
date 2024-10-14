@@ -1,0 +1,11 @@
+<h2 class="text-white text-3xl mb-5">World configuration</h2>
+<ci-ui-card>
+  <h3>Date and weather</h3>
+  <div class="flex gap-form">
+    <app-date-form path="root.properties.SaveData_0.Struct.value.Struct.currentDate_0" />
+    <app-enum-form
+      label="Weather"
+      path="root.properties.SaveData_0.Struct.value.Struct.currentWeather_0"
+    ></app-enum-form>
+  </div>
+</ci-ui-card>
