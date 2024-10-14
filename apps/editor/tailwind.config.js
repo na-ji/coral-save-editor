@@ -17,6 +17,10 @@ module.exports = {
         muted: {
           DEFAULT: 'rgb(137 124 103)',
         },
+        active: {
+          DEFAULT: 'rgb(133 213 186)',
+          dark: 'rgb(36 75 108)',
+        },
       },
     },
   },

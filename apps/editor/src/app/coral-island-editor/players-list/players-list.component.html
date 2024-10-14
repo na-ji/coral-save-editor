@@ -6,13 +6,15 @@
     <a
       class="rounded-3xl block p-4 bg-beige font-bold group"
       [routerLink]="['player', $index]"
-      routerLinkActive="active !bg-[#44b899] text-white"
+      routerLinkActive="active !bg-active text-active-dark"
     >
       <div class="flex justify-between items-center text-lg">
-        <div class="text-muted group-[.active]:text-white">{{ playerInfo + '.farmName_0.Str' | saveGameValue }}</div>
+        <div class="text-muted group-[.active]:text-active-dark">
+          {{ playerInfo + '.farmName_0.Str' | saveGameValue }}
+        </div>
         <ci-ui-money [amount]="playerPath + '.playerCurrentGold_0.Int' | saveGameValue" />
       </div>
-      <div class="text-primary-dark text-xl group-[.active]:text-white">
+      <div class="text-primary-dark text-xl group-[.active]:text-active-dark">
         {{ playerInfo + '.Name_0.Str' | saveGameValue }}
       </div>
     </a>
