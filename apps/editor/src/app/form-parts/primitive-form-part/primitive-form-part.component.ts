@@ -10,7 +10,6 @@ import { MatInput } from '@angular/material/input';
   standalone: true,
   imports: [ReactiveFormsModule, MatFormField, MatInput, MatLabel],
   templateUrl: './primitive-form-part.component.html',
-  styleUrl: './primitive-form-part.component.scss',
 })
 export class PrimitiveFormPartComponent implements OnInit {
   path = input.required<string>();
