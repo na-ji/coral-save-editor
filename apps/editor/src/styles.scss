@@ -1,8 +1,14 @@
 @use '_fonts';
+@use '_material-theme';
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+html,
+body {
+  height: 100%;
+}
 
 body {
   background: linear-gradient(#0009, #0009) fixed, url(/bg.jpg) center no-repeat fixed;
