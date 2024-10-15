@@ -15,6 +15,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@coral-guide/assets": ["libs/coral-guide-assets/src/index.ts"],
       "@coral-island/enums": ["libs/coral-island-enums/index.ts"],
       "@coral-island/ui": ["libs/coral-island-ui/src/index.ts"],
       "@coral-island/utils": ["libs/coral-island-utils/src/index.ts"],

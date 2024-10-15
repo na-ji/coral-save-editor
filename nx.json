@@ -76,5 +76,6 @@
         "createRelease": "github"
       }
     }
-  }
+  },
+  "defaultProject": "editor"
 }

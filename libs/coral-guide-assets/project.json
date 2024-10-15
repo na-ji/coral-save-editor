@@ -1,0 +1,13 @@
+{
+  "name": "coral-guide-assets",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/coral-guide-assets/src",
+  "prefix": "cga",
+  "projectType": "library",
+  "tags": [],
+  "targets": {
+    "lint": {
+      "executor": "@nx/eslint:lint"
+    }
+  }
+}
