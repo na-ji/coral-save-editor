@@ -24,6 +24,10 @@ jobs:
         run: npm ci --prefer-offline
       - name: 'Print Environment Info'
         run: npx nx report
+      - name: 'Setup git'
+        run: |
+          git config --global user.email "na-ji@users.noreply.github.com"
+          git config --global user.name "Release bot"
       - name: 'Release app'
         run: npx nx release --skip-publish
         env:
