@@ -67,7 +67,7 @@
     }
   },
   "release": {
-    "projects": ["*"],
+    "projects": ["apps/*", "libs/save_parser"],
     "version": {
       "conventionalCommits": true
     },
