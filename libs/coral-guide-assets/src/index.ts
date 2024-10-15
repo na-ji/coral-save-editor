@@ -1,4 +1,6 @@
 export * from './lib/database.service';
+export * from './lib/item-icon/item-icon.component';
+export * from './lib/rarity-icon/rarity-icon.component';
 
 export * from './lib/data-types/types/effects/add-item-to-inventory-effect.type';
 export * from './lib/data-types/types/effects/boost-max-stamina-effect.type';

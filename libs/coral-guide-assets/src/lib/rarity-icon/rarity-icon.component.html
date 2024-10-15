@@ -1,0 +1,7 @@
+@if (quality() && quality() !== QUALITY.BASE) {
+<img
+  (error)="setFallBack($event)"
+  alt=""
+  src="{{ REPOSITORY_URL }}/assets/ui/images/icons/quality-stars/T_Icon_Star{{ quality() | titlecase }}B.png"
+/>
+}
