@@ -2,11 +2,12 @@ import { Component, computed, input } from '@angular/core';
 import { PlayerInfoComponent } from './player-info/player-info.component';
 import { SaveGameValuePipe } from '../../core/save-game/save-game-value.pipe';
 import { CardComponent } from '@coral-island/ui';
+import { CookingComponent } from './cooking/cooking.component';
 
 @Component({
   selector: 'app-player',
   standalone: true,
-  imports: [PlayerInfoComponent, SaveGameValuePipe, CardComponent],
+  imports: [PlayerInfoComponent, SaveGameValuePipe, CardComponent, CookingComponent],
   templateUrl: './player.component.html',
   styleUrl: './player.component.scss',
 })

@@ -1,0 +1,24 @@
+<button (click)="addRecipe()">add</button>
+
+@let recipeArray = cookedRecipesPath | saveGameValue ;
+<div class="flex flex-wrap gap-x-8">
+  @for (recipe of recipeArray; track recipe) {
+  <div class="flex gap-form">
+    <app-name-property-form-part [path]="cookedRecipesPath + '.' + $index + '.Struct.recipeName_0'">
+      <mat-label>Recipe</mat-label>
+      @for (options of recipeOptions | async; track options) {
+      <mat-option [value]="options.value">
+        <div class="flex gap-2 items-center">
+          @if (options.icon) {
+          <cga-item-icon class="size-8 shrink-0" [itemName]="options.icon" />
+          }
+          {{ options.displayName }}
+        </div>
+      </mat-option>
+      }
+    </app-name-property-form-part>
+    <app-primitive-form-part label="Amount" [path]="cookedRecipesPath + '.' + $index + '.Struct.quantity_0.Int'" />
+    <button (click)="removeRecipe($index)">del</button>
+  </div>
+  }
+</div>

@@ -1,0 +1,18 @@
+<mat-form-field>
+  @if (label()) {
+  <mat-label>
+    <ng-content select="mat-label"></ng-content>
+  </mat-label>
+  }
+  <mat-select [formControl]="formControl">
+    @for (option of options(); track option) {
+    <mat-option [value]="option.value">
+      @if (option._text?.nativeElement?.innerHTML) {
+      <div [innerHTML]="option._text?.nativeElement?.innerHTML | bypassSecurityTrustHtml"></div>
+      } @else {
+      {{ option.viewValue }}
+      }
+    </mat-option>
+    }
+  </mat-select>
+</mat-form-field>
