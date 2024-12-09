@@ -22,6 +22,8 @@ const CHUNK_SIZE: usize = 0x20000;
 const CHUNK_SIZE_IN_BYTES: [u8; 4] = [0x00, 0x00, 0x02, 0x00];
 const NULL_HEADER: [u8; 4] = [0x00, 0x00, 0x00, 0x00];
 
+const VERSION: &str = env!("CARGO_PKG_VERSION");
+
 #[wasm_bindgen]
 extern "C" {}
 
@@ -103,6 +105,7 @@ fn read_compressed_save_data(outer_save: &mut Save) -> Result<&mut Vec<u8>, &str
 #[wasm_bindgen]
 pub fn decode_save(raw_save: ArrayBuffer) -> Result<JsValue, String> {
     set_panic_hook();
+    console::log_2(&"save_parser ".into(), &String::from(VERSION).into());
     console::time_with_label("Decoding outer save");
     let outer_save_content: Vec<u8> =
         Uint8Array::new_with_byte_offset_and_length(&raw_save, 0, raw_save.byte_length()).to_vec();
@@ -194,6 +197,7 @@ pub fn compress_save(save: &Vec<u8>) -> Vec<u8> {
 #[wasm_bindgen]
 pub fn encode_save(raw_save: ArrayBuffer, new_inner_save: JsValue) -> Result<Vec<u8>, String> {
     set_panic_hook();
+    console::log_2(&"save_parser ".into(), &String::from(VERSION).into());
 
     console::time_with_label("Encoding inner save");
     let inner_save: Save = new_inner_save.into_serde().unwrap();
