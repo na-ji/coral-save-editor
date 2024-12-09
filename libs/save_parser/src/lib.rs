@@ -112,6 +112,15 @@ pub fn decode_save(raw_save: ArrayBuffer) -> Result<JsValue, String> {
         Ok(mut outer_save) => {
             console::time_end_with_label("Decoding outer save");
 
+            let save_version: Result<&mut i32, &str> = match &mut outer_save.root.properties["Version"].inner {
+              PropertyInner::Int(save_version) => Ok(save_version),
+              _ => Err("Invalid save version")
+            };
+            if save_version.is_err() {
+              return Err(save_version.expect_err("").parse().unwrap());
+            }
+            console::log_2(&"Save version ".into(), &save_version?.to_string().into());
+
             let bytes_result = read_compressed_save_data(&mut outer_save);
             if bytes_result.is_err() {
                 return Err(bytes_result.expect_err("").parse().unwrap());
