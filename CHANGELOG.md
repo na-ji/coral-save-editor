@@ -1,3 +1,15 @@
+## 0.3.0 (2024-12-09)
+
+### 🚀 Features
+
+- **save_parser:** log decoded save version ([fc54f68](https://github.com/na-ji/coral-save-editor/commit/fc54f68))
+- **save_parser:** log current crate version when decode/encoding save ([c3b90f7](https://github.com/na-ji/coral-save-editor/commit/c3b90f7))
+- **save_parser:** add support for latest save version ([7f3125b](https://github.com/na-ji/coral-save-editor/commit/7f3125b))
+
+### ❤️ Thank You
+
+- Naji Astier @na-ji
+
 ## 0.2.0 (2024-10-15)
 
 ### 🚀 Features
