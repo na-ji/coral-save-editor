@@ -1,3 +1,13 @@
+## 0.3.1 (2025-01-01)
+
+### 🩹 Fixes
+
+- **save_parser:** fix save not recognized by game when size change ([6a5b194](https://github.com/na-ji/coral-save-editor/commit/6a5b194))
+
+### ❤️ Thank You
+
+- Naji Astier @na-ji
+
 ## 0.3.0 (2024-12-09)
 
 ### 🚀 Features
