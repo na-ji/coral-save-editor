@@ -130,7 +130,7 @@ pub fn decode_save(raw_save: ArrayBuffer) -> Result<JsValue, String> {
             }
             let compressed_bytes = bytes_result?;
 
-            let decompressed_bytes = decompress_save_data(compressed_bytes);
+            let decompressed_bytes = &decompress_save_data(compressed_bytes)[4..];
             let mut inner_save_buffer = Cursor::new(decompressed_bytes);
             console::time_with_label("Decoding inner save");
             let types = types::get_types();
@@ -205,8 +205,11 @@ pub fn encode_save(raw_save: ArrayBuffer, new_inner_save: JsValue) -> Result<Vec
     inner_save
         .write(&mut inner_save_buffer)
         .expect("Failed to encode inner save");
-    let inner_save_bytes = inner_save_buffer.into_inner();
+    let mut inner_save_bytes = inner_save_buffer.into_inner();
     console::time_end_with_label("Encoding inner save");
+
+    let inner_save_size_le: [u8; 4] = u32::to_le_bytes((inner_save_bytes.len() - 4) as u32);
+    inner_save_bytes.splice(0..0, inner_save_size_le.iter().cloned());
 
     console::time_with_label("Compressing inner save");
     let compressed_inner_save = compress_save(&inner_save_bytes);
