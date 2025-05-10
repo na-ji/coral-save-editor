@@ -128,6 +128,8 @@ pub fn get_types() -> Types {
     types.add(String::from(".saveData.fertilizerDataMap.savedEntryMap.entryArray.Value"), StructType::Struct(None));
     types.add(String::from(".saveData.excavationSoilDataMap.Value"), StructType::Struct(None));
     types.add(String::from(".saveData.excavationSoilDataMap.savedEntryMap.Value"), StructType::Struct(None));
+    types.add(String::from(".saveData.players.minigameClaimedReward.claimedRewardWinPosition.Value"), StructType::Struct(None));
+    types.add(String::from(".saveData.players.minigameClaimedReward.claimedTriviaCategoryAndWinPosition.Value"), StructType::Struct(None));
 
     types
 }
