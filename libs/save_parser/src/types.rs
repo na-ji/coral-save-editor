@@ -44,6 +44,7 @@ pub fn get_types() -> Types {
     types.add(String::from(".saveData.ranchBuildingData.Value"), StructType::Struct(None));
     types.add(String::from(".saveData.ranchBuildingData.animalsData.logAnimalMoods.Key"), StructType::Struct(None));
     types.add(String::from(".saveData.ranchBuildingData.animalsData.logAnimalMoods.Value"), StructType::Struct(Some(String::from("Set"))));
+    types.add(String::from(".saveData.ranchBuildingData.autoCollectorData.Key"), StructType::Struct(None));
     types.add(String::from(".saveData.ranchBuildingData.autoCollectorData.Value"), StructType::Struct(None));
     types.add(String::from(".saveData.ranchBuildingData.interiorSaveData.tileEntryMap.Key"), StructType::Struct(None));
     types.add(String::from(".saveData.ranchBuildingData.interiorSaveData.tileEntryMap.Value"), StructType::Struct(Some(String::from("Map"))));
